@@ -18,8 +18,31 @@ GREEN.start(0)
 BLUE = GPIO.PWM(bpin, freq)
 BLUE.start(0)
 frequency = freq
+
+def rgb(r,g,b):
+    RED.ChangeDutyCycle(r)
+    GREEN.ChangeDutyCycle(g)
+    RED.ChangeDutyCycle(b)
+
+
 while (True):
-    for col in [RED, GREEN, BLUE]:
-        for i in range(100):
-            col.ChangeDutyCycle(i)
-        col.ChangeDutyCycle(2)
+    r = 0
+    g = 0
+    b = 20
+    
+    # transition to dim yellow
+    for i in range(50):
+        r = r + 2
+        g = g + 1
+        #b = b - 1
+        rgb(r,g,b)
+        time.sleep(0.5)
+    
+    # transition to red 
+    for i in range(50):
+        r = r + 2
+        g = g + 1
+        b = b + 1
+        rgb(r,g,b)
+        time.sleep(0.5)
+    
