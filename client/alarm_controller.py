@@ -17,6 +17,9 @@ def gpio_control(time):
     except Exception as e:
         return statement('Could not translate the date.')
 
-    print(f"alarm set to {date_time}")
+    print('alarm set to {}'.format(date_time))
 
     return statement('Setting alarm for {}'.format(time))
+
+if __name__ == '__main__':
+        app.run(debug=True, host='0.0.0.0', port=5000)
