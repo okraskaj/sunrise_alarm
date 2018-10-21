@@ -33,8 +33,11 @@ class Color:
                 )
 
 
-def set_rgb(col):
+def set_color(col):
     r, g, b = col.get_centimal_vals()
+    set_rgb(r,g,b)
+
+def set_rgb(r,g,b):
     RED.ChangeDutyCycle(r)
     GREEN.ChangeDutyCycle(g)
     RED.ChangeDutyCycle(b)
@@ -44,16 +47,16 @@ def transition(start_col, end_col, steps):
     old_r, old_g, old_b = start_col.get_centimal_vals()
     new_r, new_g, new_b = end_col.get_centimal_vals()
 
-    rstep = new_r - old_r / steps
-    gstep = new_g - old_g / steps
-    bstep = new_b - old_b / steps
-    set_rgb(start_col)
+    rstep = (new_r - old_r) / steps
+    gstep = (new_g - old_g) / steps
+    bstep = (new_b - old_b) / steps
+    set_color(start_col)
 
-    for s in steps:
-        curr_r = (255 * old_r + int(rstep*s))/100
-        curr_g = (255 * old_g + int(gstep*s))/100
-        curr_b = (255 * old_b + int(bstep*s))/100
-        set_rgb(Color(curr_r, curr_g, curr_b))
+    for s in range(steps):
+        curr_r = old_r + int(rstep*s)
+        curr_g = old_g + int(gstep*s)
+        curr_b = old_b + int(bstep*s)
+        set_rgb(curr_r, curr_g, curr_b)
         time.sleep(0.3)
 
 
